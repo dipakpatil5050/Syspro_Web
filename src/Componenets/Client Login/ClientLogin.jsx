@@ -181,7 +181,7 @@ function ClientLogin() {
             alt="Your Company"
           />
           <h3 className="flex items-center justify-center text-xl font-bold">
-            Welcome
+            {/* Welcome */}
           </h3>
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account

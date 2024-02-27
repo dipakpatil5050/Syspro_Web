@@ -29,14 +29,19 @@ function ClientAuth() {
       const response = await axios.post(mpinapi, { mPin }, { headers });
       setData(response.data);
 
-      const apiMpin = response.data?.Data?.mPin;
-      const Client_name = response.data?.Data?.SlugUrl;
+      const apidata = response.data?.Data;
+      const apiMpin = apidata?.mPin;
+      const Client_name = apidata?.SlugUrl;
+      const Login_API = apidata?.ServerBaseUrl;
+
       if (apiMpin === mPin) {
         navigate("/login");
         toast.success("Mpin Verified !");
         toast(`Welcome ${Client_name}`, {
           icon: "👏",
         });
+        console.log(Login_API);
+        console.log(Client_name);
       } else {
         alert("Invalid MPIN");
         setMPin("");
