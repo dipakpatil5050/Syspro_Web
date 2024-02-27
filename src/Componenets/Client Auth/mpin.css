@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap");
+
+/* .mpin {
+  background-image: url(https://images.pexels.com/photos/399161/pexels-photo-399161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover;
+  object-fit: cover;
+} */
+
+.mpintxt {
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}

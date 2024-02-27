@@ -1,94 +1,66 @@
 import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-import { useLogin } from "../../contexts/LoginContext";
+// import { useLogin } from "../../contexts/LoginContext";
 import toast from "react-hot-toast";
-const ClientData = [
-  {
-    ServerID: 4,
-    Company_ID: 0,
-    Company_Name: "SYSRPO",
-    ServerBaseUrl: "http://103.67.238.230:1385/Textile/",
-    mPin: "SYSPRO04",
-    isActive: 1,
-    SlugUrl: " ",
-    Expairy_Dt: "2024-03-31T00:00:00",
-  },
-  {
-    ServerID: 47,
-    Company_ID: 0,
-    Company_Name: "VEER",
-    ServerBaseUrl: "http://103.67.238.230:1385/VEERAPP/",
-    mPin: "VEERAPP",
-    isActive: 1,
-    SlugUrl: "VEERAPP",
-    Expairy_Dt: "2024-03-31T00:00:00",
-  },
-  {
-    ServerID: 32,
-    Company_ID: 0,
-    Company_Name: "WSALE",
-    ServerBaseUrl: "http://103.67.238.230:1385/WSaleApp/",
-    mPin: "WSALEAPP",
-    isActive: 1,
-    SlugUrl: "WSaleApp",
-    Expairy_Dt: "2024-03-31T00:00:00",
-  },
-];
-
+import axios from "axios";
+import "./mpin.css";
 function ClientAuth() {
-  const [mpin, setMpin] = useState("");
-  const [userData, setUserData] = useState(null);
-  const [username, setUsername] = useState("");
+  // const [userData, setUserData] = useState(null);
+  const [data, setData] = useState(null);
+  const [mPin, setMPin] = useState("");
   const navigate = useNavigate();
 
-  const { login } = useLogin();
+  // const { login } = useLogin();
 
-  const api = "https://jsonplaceholder.typicode.com/users";
+  const handleInputChange = (e) => {
+    setMPin(e.target.value);
+  };
 
-  const handleSubmit = (e) => {
+  const fetchData = async () => {
+    const mpinapi = `http://103.67.238.230:1385/SysMpin/authenticateSysmpin?mPin=${mPin}`;
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer your_token_here",
+      "x-api-key": mPin,
+    };
+
     try {
-      // const response = await axios.post(
-      //   api,
-      //   { mpin },
-      //   {
-      //     headers: {
-      //       /* Your headers */
-      //     },
-      //   }
-      // );
-      e.preventDefault();
+      const response = await axios.post(mpinapi, { mPin }, { headers });
+      setData(response.data);
 
-      const user = ClientData.find((u) => u.mPin === mpin);
-
-      if (user) {
-        // setUserData(user);
-        // setUsername(user.Company_Name);
-        // login(username);
-        // localStorage.setItem("userData", JSON.stringify(user));
-
-        // alert("Welcome", user.Company_Name);
+      const apiMpin = response.data?.Data?.mPin;
+      const Client_name = response.data?.Data?.SlugUrl;
+      if (apiMpin === mPin) {
         navigate("/login");
         toast.success("Mpin Verified !");
+        toast(`Welcome ${Client_name}`, {
+          icon: "👏",
+        });
       } else {
         alert("Invalid MPIN");
-        setMpin("");
+        setMPin("");
       }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await fetchData();
     } catch (error) {
       console.log("Error : ", error);
     }
   };
 
-  const handleMpinChange = (e) => {
-    setMpin(e.target.value);
-  };
   return (
     <>
       <section>
-        <div className="flex sitems-center justify-center mt-52 px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className=" flex sitems-center justify-center mt-52 px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <h2 className="text-center text-2xl font-bold leading-tight text-black">
+            <h2 className="mpintxt text-center text-3xl leading-tight text-black">
               M-Pin
             </h2>
 
@@ -102,9 +74,9 @@ function ClientAuth() {
                   <div className="mt-2">
                     <input
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      type="password"
-                      value={mpin}
-                      onChange={handleMpinChange}
+                      type="text"
+                      value={mPin}
+                      onChange={handleInputChange}
                       placeholder="Enter your M-pin here..."
                     ></input>
                   </div>
@@ -117,7 +89,8 @@ function ClientAuth() {
                     "
                     onClick={handleSubmit}
                   >
-                    Submit <ArrowRight className="ml-2" size={16} />
+                    Submit
+                    {/* <ArrowRight className="ml-2" size={16} /> */}
                   </button>
                 </div>
               </div>

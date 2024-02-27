@@ -173,7 +173,7 @@ function ClientLogin() {
   };
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center mt-24 px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center mt-11 px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-44 w-auto"
@@ -218,14 +218,6 @@ function ClientLogin() {
                 >
                   Password
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -244,14 +236,21 @@ function ClientLogin() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 onClick={handleLogin}
               >
                 Sign in
               </button>
             </div>
           </form>
-
+          <div className="text-sm mt-5">
+            <a
+              href="#"
+              className="font-semibold text-indigo-600 hover:text-indigo-500"
+            >
+              Forgot password?
+            </a>
+          </div>
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
             <a
