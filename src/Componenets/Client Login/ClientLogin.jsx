@@ -36,7 +36,6 @@ function ClientLogin() {
     try {
       const response = await axios.post(loginUrl, body, { headers });
       const userData = response.data;
-      console.log(userData);
       dispatch(setUserData(userData));
       navigate("/Home");
       toast.success("Login successful!");

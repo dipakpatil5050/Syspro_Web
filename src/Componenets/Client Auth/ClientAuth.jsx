@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { setuserMpinData } from "../../redux/reducers/authReducer";
 
 function ClientAuth() {
-  // const [data, setData] = useState(null);
   const [mPin, setMPin] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,7 +24,6 @@ function ClientAuth() {
 
     try {
       const response = await axios.post(mpinapi, { mPin }, { headers });
-      // setData(response.data);
       dispatch(setuserMpinData(response.data));
 
       const apidata = response.data?.Data;
@@ -63,7 +61,6 @@ function ClientAuth() {
             </h2>
 
             <form
-              // action="#"
               method="POST"
               className="mt-8 flex items-center justify-center"
             >
