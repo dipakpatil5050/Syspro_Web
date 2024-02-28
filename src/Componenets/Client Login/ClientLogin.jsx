@@ -1,71 +1,58 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import toast from "react-hot-toast";
-const ClientData = [
-  {
-    UserID: 1,
-    DeviceId: "",
-    User_Type: "System",
-    Access_Type: "Company",
-    Access_Key: "",
-    IsSuperAdminLog: false,
-    IsAdminLog: false,
-    CompanyID: 3,
-    CompanyName: "AADINATH AGENCY",
-    CompanyGSTCST: "24BEHPS7230G1ZH",
-    CompanyContactNo: "97277-63126",
-    CompanyAddress1: "119,UMA INDUSTRAIAL SOCITEY, B/H -SNS HOUSE,",
-    CompanyAddress2: "NR.CNG PUMP,BHATAR CHAR RASTA,SURAT-395017,",
-    YearMasterID: 11,
-    YearMasterName: "2023-04-01 - 2024-03-31",
-    PremiseID: 1,
-    PremiseName: "SURAT",
-    DepartmentID: 1,
-    DepartmentName: "SURAT",
-    Session_Token: "LU4jPKe/xhhLEyeOEK99wWH3iFg= ()",
-    Address: "Address",
-    Token: "33874f9c-1ad4-4c76-a2ba-29aba1a30c34",
-    Name: null,
-    EmailID: "admin",
-    UserName: "admin",
-    CompanyFromDate: null,
-    CompanyToDate: null,
-    LastAccessTime: "2021-12-14T10:55:59.1092473+05:30",
-    FCMToken: null,
-    MenuId: 0,
-    SubMenuId: 0,
-    IsAdd: false,
-    IsEdit: false,
-    IsDelete: false,
-    IsFind: false,
-    ApiToken: null,
-  },
-];
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../redux/reducers/authReducer";
 
 function ClientLogin() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [isAuthenticate, setIsAuthenticate] = useState(false);
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
   const userMpinData = useSelector((state) => state.auth.userMpinData);
-  const FetchLoginData = async () => {
-    // const Login_API =
-  };
 
-  const handleLogin = () => {
-    const user = ClientData.find(
-      (u) => u.UserName === username && u.password === password
-    );
-    if (user) {
-      setIsLoggedIn(true);
+  const ClientType = userMpinData?.Data?.SlugUrl;
+  const ServerBaseUrl = userMpinData?.Data?.ServerBaseUrl;
+  const mPin = userMpinData?.Data?.mPin;
+
+  const fetchLoginData = async () => {
+    const loginUrl = `${ServerBaseUrl}api/Static/UserLogin`;
+
+    const body = {
+      UserName: username,
+      Password: password,
+      IsRemeber: true,
+      DeviceId: "",
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+      "x-api-key": mPin,
+    };
+
+    try {
+      const response = await axios.post(loginUrl, body, { headers });
+      const userData = response.data;
+      console.log(userData);
+      dispatch(setUserData(userData));
       navigate("/Home");
       toast.success("Login successful!");
+    } catch (error) {
+      console.error("Error logging in:", error);
+      toast.error(
+        "Login failed. Please check your login credentials and try again."
+      );
     }
   };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    fetchLoginData();
+  };
+
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center mt-11 px-6 py-12 lg:px-8">
@@ -76,21 +63,21 @@ function ClientLogin() {
             alt="Your Company"
           />
           <h3 className="flex items-center justify-center text-xl font-bold">
-            {/* Welcome */}
+            {ClientType}
           </h3>
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" method="POST">
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Email address
+                Username
               </label>
               <div className="mt-2">
                 <input
@@ -132,7 +119,6 @@ function ClientLogin() {
               <button
                 type="submit"
                 className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
-                onClick={handleLogin}
               >
                 Sign in
               </button>

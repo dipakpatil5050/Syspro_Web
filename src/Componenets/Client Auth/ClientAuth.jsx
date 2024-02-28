@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -8,18 +7,14 @@ import { useDispatch } from "react-redux";
 import { setuserMpinData } from "../../redux/reducers/authReducer";
 
 function ClientAuth() {
-  // const [userData, setUserData] = useState(null);
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
   const [mPin, setMPin] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const { login } = useLogin();
-
   const handleInputChange = (e) => {
     setMPin(e.target.value);
   };
-
   const fetchData = async () => {
     const mpinapi = `http://103.67.238.230:1385/SysMpin/authenticateSysmpin?mPin=${mPin}`;
     const headers = {
@@ -30,28 +25,21 @@ function ClientAuth() {
 
     try {
       const response = await axios.post(mpinapi, { mPin }, { headers });
-      setData(response.data);
-      console.log(response);
+      // setData(response.data);
       dispatch(setuserMpinData(response.data));
 
       const apidata = response.data?.Data;
       const apiMpin = apidata?.mPin;
-      const Client_name = apidata?.SlugUrl;
-      const Login_API = apidata?.ServerBaseUrl;
 
       if (apiMpin === mPin) {
         navigate("/login");
         toast.success("Mpin Verified !");
-        toast(`Welcome ${Client_name}`, {
-          icon: "👏",
-        });
-        console.log(Login_API);
-        console.log(Client_name);
       } else {
-        alert("Invalid MPIN");
+        toast.error("Invalid MPIN");
         setMPin("");
       }
     } catch (error) {
+      toast.error("Invalid MPIN");
       console.error("Error fetching data:", error);
     }
   };
@@ -100,7 +88,6 @@ function ClientAuth() {
                     onClick={handleSubmit}
                   >
                     Submit
-                    {/* <ArrowRight className="ml-2" size={16} /> */}
                   </button>
                 </div>
               </div>
