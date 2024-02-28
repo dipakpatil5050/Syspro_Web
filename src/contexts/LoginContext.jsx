@@ -15,7 +15,7 @@ export const LoginProvider = ({ children }) => {
     setUser(userData);
   };
 
-  //   http://103.67.238.230:1385/SysMpin/authenticateSysmpin?mPin=VEERAPP
+  //  http://103.67.238.230:1385/SysMpin/authenticateSysmpin?mPin=VEERAPP
   const logout = () => {
     setUsername("");
     setIsLoggedIn(false);

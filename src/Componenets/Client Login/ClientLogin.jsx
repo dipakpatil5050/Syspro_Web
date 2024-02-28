@@ -1,157 +1,46 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "../../contexts/LoginContext";
+import { useSelector } from "react-redux";
+
 import toast from "react-hot-toast";
 const ClientData = [
   {
-    id: 1,
-    name: "wedding",
-    mpin: "0001",
-    username: "weddinguser",
-    password: "admin123",
-    email: "Sincere@april.biz",
-    address: {
-      street: "Kulas Light",
-      suite: "Apt. 556",
-      city: "Gwenborough",
-      zipcode: "92998-3874",
-      geo: {
-        lat: "-37.3159",
-        lng: "81.1496",
-      },
-    },
-    phone: "1-770-736-8031 x56442",
-    website: "hildegard.org",
-    company: {
-      name: "Romaguera-Crona",
-      catchPhrase: "Multi-layered client-server neural-net",
-      bs: "harness real-time e-markets",
-    },
-  },
-  {
-    id: 2,
-    name: "mangaldip",
-    mpin: "0002",
-    username: "mangaldipuser",
-    password: "admin123",
-    email: "Shanna@melissa.tv",
-    address: {
-      street: "Victor Plains",
-      suite: "Suite 879",
-      city: "Wisokyburgh",
-      zipcode: "90566-7771",
-      geo: {
-        lat: "-43.9509",
-        lng: "-34.4618",
-      },
-    },
-    phone: "010-692-6593 x09125",
-    website: "anastasia.net",
-    company: {
-      name: "Deckow-Crist",
-      catchPhrase: "Proactive didactic contingency",
-      bs: "synergize scalable supply-chains",
-    },
-  },
-  {
-    id: 3,
-    name: "isha",
-    mpin: "0003",
-    username: "ishauser",
-    password: "admin123",
-    email: "Nathan@yesenia.net",
-    address: {
-      street: "Douglas Extension",
-      suite: "Suite 847",
-      city: "McKenziehaven",
-      zipcode: "59590-4157",
-      geo: {
-        lat: "-68.6102",
-        lng: "-47.0653",
-      },
-    },
-    phone: "1-463-123-4447",
-    website: "ramiro.info",
-    company: {
-      name: "Romaguera-Jacobson",
-      catchPhrase: "Face to face bifurcated interface",
-      bs: "e-enable strategic applications",
-    },
-  },
-  {
-    id: 4,
-    name: "mistyrose",
-    mpin: "0004",
-    username: "mistyroseuser",
-    password: "admin123",
-    email: "Julianne.OConner@kory.org",
-    address: {
-      street: "Hoeger Mall",
-      suite: "Apt. 692",
-      city: "South Elvis",
-      zipcode: "53919-4257",
-      geo: {
-        lat: "29.4572",
-        lng: "-164.2990",
-      },
-    },
-    phone: "493-170-9623 x156",
-    website: "kale.biz",
-    company: {
-      name: "Robel-Corkery",
-      catchPhrase: "Multi-tiered zero tolerance productivity",
-      bs: "transition cutting-edge web services",
-    },
-  },
-  {
-    id: 5,
-    name: "khatupati",
-    mpin: "0005",
-    username: "khatupatiuser",
-    password: "admin123",
-    email: "Lucio_Hettinger@annie.ca",
-    address: {
-      street: "Skiles Walks",
-      suite: "Suite 351",
-      city: "Roscoeview",
-      zipcode: "33263",
-      geo: {
-        lat: "-31.8129",
-        lng: "62.5342",
-      },
-    },
-    phone: "(254)954-1289",
-    website: "demarco.info",
-    company: {
-      name: "Keebler LLC",
-      catchPhrase: "User-centric fault-tolerant solution",
-      bs: "revolutionize end-to-end systems",
-    },
-  },
-  {
-    id: 6,
-    name: "khatupati",
-    mpin: "0005",
-    username: "admin",
-    password: "admin",
-    email: "Lucio_Hettinger@annie.ca",
-    address: {
-      street: "Skiles Walks",
-      suite: "Suite 351",
-      city: "Roscoeview",
-      zipcode: "33263",
-      geo: {
-        lat: "-31.8129",
-        lng: "62.5342",
-      },
-    },
-    phone: "(254)954-1289",
-    website: "demarco.info",
-    company: {
-      name: "Keebler LLC",
-      catchPhrase: "User-centric fault-tolerant solution",
-      bs: "revolutionize end-to-end systems",
-    },
+    UserID: 1,
+    DeviceId: "",
+    User_Type: "System",
+    Access_Type: "Company",
+    Access_Key: "",
+    IsSuperAdminLog: false,
+    IsAdminLog: false,
+    CompanyID: 3,
+    CompanyName: "AADINATH AGENCY",
+    CompanyGSTCST: "24BEHPS7230G1ZH",
+    CompanyContactNo: "97277-63126",
+    CompanyAddress1: "119,UMA INDUSTRAIAL SOCITEY, B/H -SNS HOUSE,",
+    CompanyAddress2: "NR.CNG PUMP,BHATAR CHAR RASTA,SURAT-395017,",
+    YearMasterID: 11,
+    YearMasterName: "2023-04-01 - 2024-03-31",
+    PremiseID: 1,
+    PremiseName: "SURAT",
+    DepartmentID: 1,
+    DepartmentName: "SURAT",
+    Session_Token: "LU4jPKe/xhhLEyeOEK99wWH3iFg= ()",
+    Address: "Address",
+    Token: "33874f9c-1ad4-4c76-a2ba-29aba1a30c34",
+    Name: null,
+    EmailID: "admin",
+    UserName: "admin",
+    CompanyFromDate: null,
+    CompanyToDate: null,
+    LastAccessTime: "2021-12-14T10:55:59.1092473+05:30",
+    FCMToken: null,
+    MenuId: 0,
+    SubMenuId: 0,
+    IsAdd: false,
+    IsEdit: false,
+    IsDelete: false,
+    IsFind: false,
+    ApiToken: null,
   },
 ];
 
@@ -161,9 +50,15 @@ function ClientLogin() {
   const [password, setPassword] = useState("");
   // const [isAuthenticate, setIsAuthenticate] = useState(false);
   const navigate = useNavigate();
+
+  const userMpinData = useSelector((state) => state.auth.userMpinData);
+  const FetchLoginData = async () => {
+    // const Login_API =
+  };
+
   const handleLogin = () => {
     const user = ClientData.find(
-      (u) => u.username === username && u.password === password
+      (u) => u.UserName === username && u.password === password
     );
     if (user) {
       setIsLoggedIn(true);
@@ -189,7 +84,7 @@ function ClientLogin() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" method="POST">
             <div>
               <label
                 htmlFor="email"
