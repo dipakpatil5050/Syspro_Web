@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../redux/reducers/authReducer";
+import Cookies from "js-cookie";
 
 function ClientLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  // const user = localStorage.getItem("user");
 
   const dispatch = useDispatch();
   const userMpinData = useSelector((state) => state.auth.userMpinData);
@@ -17,6 +20,13 @@ function ClientLogin() {
   const ClientType = userMpinData?.Data?.SlugUrl;
   const ServerBaseUrl = userMpinData?.Data?.ServerBaseUrl;
   const mPin = userMpinData?.Data?.mPin;
+
+  useEffect(() => {
+    const isLoggedIn = Cookies.get("token");
+    if (isLoggedIn) {
+      navigate("/Home");
+    }
+  }, []);
 
   const fetchLoginData = async () => {
     const loginUrl = `${ServerBaseUrl}api/Static/UserLogin`;
@@ -35,9 +45,14 @@ function ClientLogin() {
 
     try {
       const response = await axios.post(loginUrl, body, { headers });
-      const userData = response.data;
+      const userData = response.data.Data;
+      const Token = userData.Token;
+      const CompanyName = userData.CompanyName;
+
+      Cookies.set("token", Token, { expires: 7 });
       dispatch(setUserData(userData));
       navigate("/Home");
+      // localStorage.setItem("user", CompanyName);
       toast.success("Login successful!");
     } catch (error) {
       console.error("Error logging in:", error);
@@ -46,6 +61,10 @@ function ClientLogin() {
       );
     }
   };
+
+  // if (user === CompanyName) {
+  //   return <Navigate to={"/home"} replace />;
+  // }
 
   const handleLogin = (e) => {
     e.preventDefault();

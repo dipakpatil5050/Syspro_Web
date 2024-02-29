@@ -16,7 +16,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setUserData } = authSlice.actions;
-export const { setuserMpinData } = authSlice.actions;
-
+export const { setuserMpinData, setUserData } = authSlice.actions;
 export default authSlice.reducer;

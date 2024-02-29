@@ -10,4 +10,5 @@ npm install
 
 npm run dev
 
-<h3 align="center">Software Develope by </h3> <a href="https://github.com/dipakpatil5050" target="blank">Dipak Patil </a>
+<h3 align="center">Developer : <a href="https://github.com/dipakpatil5050" target="blank"> Dipak Patil </a>
+</h3>
