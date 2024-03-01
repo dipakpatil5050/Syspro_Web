@@ -3,15 +3,17 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
+import { setUserData } from "../../redux/reducers/authReducer";
 function Home() {
   const userData = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
   const CompanyName = userData?.CompanyName;
   const dispatch = useDispatch();
-  // const user = localStorage.getItem("user");
 
   const Logout = () => {
     Cookies.remove("token");
+    localStorage.removeItem("user");
+    dispatch(setUserData(null));
     navigate("/");
   };
 

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUserData } from "../../redux/reducers/authReducer";
+import { setUserData, setuserMpinData } from "../../redux/reducers/authReducer";
 import Cookies from "js-cookie";
 
 function ClientLogin() {
@@ -20,13 +20,13 @@ function ClientLogin() {
   const ClientType = userMpinData?.Data?.SlugUrl;
   const ServerBaseUrl = userMpinData?.Data?.ServerBaseUrl;
   const mPin = userMpinData?.Data?.mPin;
+  const userData = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
-    const isLoggedIn = Cookies.get("token");
-    if (isLoggedIn) {
+    if (userData) {
       navigate("/Home");
     }
-  }, []);
+  }, [userData, navigate]);
 
   const fetchLoginData = async () => {
     const loginUrl = `${ServerBaseUrl}api/Static/UserLogin`;
@@ -66,9 +66,18 @@ function ClientLogin() {
   //   return <Navigate to={"/home"} replace />;
   // }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    fetchLoginData();
+    try {
+      await fetchLoginData();
+      navigate("/Home");
+      toast.success("Login successful!");
+    } catch (error) {
+      console.error("Error logging in:", error);
+      toast.error(
+        "Login failed. Please check your login credentials and try again."
+      );
+    }
   };
 
   return (
@@ -81,7 +90,7 @@ function ClientLogin() {
             alt="Your Company"
           />
           <h3 className="flex items-center justify-center text-xl font-bold">
-            {ClientType}
+            {/* {ClientType} */}
           </h3>
           <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
