@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Anta&display=swap");
+
 .mpin {
-  background-image: url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2pvYjQ3My1rd2FuLTAyLWEtam9iNTk4LmpwZw.jpg);
+  background-image: url(https://i.imgur.com/zYEhqvX.jpeg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,8 +11,7 @@
 }
 
 .mpintxt {
-  font-family: "Kode Mono", monospace;
-  font-optical-sizing: auto;
-  font-weight: 700;
+  font-family: "Anta", sans-serif;
+  font-weight: 400;
   font-style: normal;
 }

@@ -47,13 +47,12 @@ function ClientLogin() {
       const response = await axios.post(loginUrl, body, { headers });
       const userData = response.data.Data;
       const Token = userData.Token;
-      const CompanyName = userData.CompanyName;
+      // const CompanyName = userData.CompanyName;
 
       Cookies.set("token", Token, { expires: 7 });
       dispatch(setUserData(userData));
       navigate("/Home");
-      // localStorage.setItem("user", CompanyName);
-      toast.success("Login successful!");
+      // toast.success("Login successful!");
     } catch (error) {
       console.error("Error logging in:", error);
       toast.error(

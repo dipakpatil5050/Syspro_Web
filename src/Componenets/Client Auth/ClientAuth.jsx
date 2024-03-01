@@ -55,9 +55,9 @@ function ClientAuth() {
     <>
       <section className="mpin h-screen w-full">
         <div className="">
-          <div className=" flex sitems-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-            <div className="xl:mx-auto xl:w-full xl:max-w-sm sm:max-w-sm  2xl:max-w-md mt-36 bg-gray-100 rounded-3xl pt-20 pb-24">
-              <h2 className="mpintxt text-center text-3xl leading-tight text-black">
+          <div className=" flex sitems-center justify-center px-2 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+            <div className="xl:mx-auto xl:w-full xl:max-w-sm sm:max-w-sm  2xl:max-w-md mt-20 pr-6 rounded-3xl pt-20">
+              <h2 className="mpintxt text-center text-3xl leading-tight font-bold text-black">
                 M-Pin
               </h2>
 
@@ -67,7 +67,7 @@ function ClientAuth() {
               >
                 <div className="space-y-5">
                   <div>
-                    <div className="mt-2">
+                    <div className="">
                       <input
                         className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 text-black mpintxt"
                         type="text"
