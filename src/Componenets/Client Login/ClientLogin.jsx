@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUserData, setuserMpinData } from "../../redux/reducers/authReducer";
 import Cookies from "js-cookie";
 import { ArrowRight } from "lucide-react";
+import "./login.css";
 
 function ClientLogin() {
   const [username, setUsername] = useState("");
@@ -72,8 +73,8 @@ function ClientLogin() {
     e.preventDefault();
     try {
       await fetchLoginData();
-      navigate("/Home");
-      toast.success("Login successful!");
+      // navigate("/Home");
+      // toast.success("Login successful!");
     } catch (error) {
       console.error("Error logging in:", error);
       toast.error(
@@ -85,22 +86,22 @@ function ClientLogin() {
   return (
     <>
       <section>
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 ">
           <div className="relative flex items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 max-[390px]:hidden">
             <div className="absolute inset-0">
               <img
-                className="h-full w-full rounded-md object-cover object-top"
-                src="https://img.freepik.com/free-vector/hand-drawn-erp-illustration_23-2149388659.jpg?w=740&t=st=1709288849~exp=1709289449~hmac=be1ec5b28928bd525996e30f6e7d2dc7a0786d0888949a10b7825c17c9c9c62e"
+                className="h-full w-full ml-14 mt-14  object-cover object-top"
+                src="https://img.freepik.com/premium-photo/graphic-software-small-business-companion_927851-5607.jpg?w=740"
                 alt=""
               />
             </div>
           </div>
-          <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className=" flex flex-1 flex-col justify-center mt-10 px-6 py-12 lg:px-8 ">
+            <div className="sm:mx-auto lg:w-6/12 sm:max-w-sm ">
               <img
-                className="mx-auto w-auto"
+                className="mx-auto w-auto sm:w-full"
                 src="https://sysproerp.in/includes/site/assets/images/logo-footer.png"
-                alt="Your Company"
+                alt="Company logo"
               />
               <h3 className="flex items-center justify-center text-xl font-bold">
                 {/* {ClientType} */}
@@ -115,7 +116,7 @@ function ClientLogin() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 text-gray-900 login-txt "
                   >
                     Username
                   </label>
@@ -127,7 +128,8 @@ function ClientLogin() {
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       required
-                      className="block w-full rounded-3xl border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      placeholder="Enter username "
+                      className="login-inputs block w-full rounded-3xl border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
@@ -136,7 +138,7 @@ function ClientLogin() {
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className=" block text-sm font-medium leading-6 text-gray-900 login-txt "
                     >
                       Password
                     </label>
@@ -147,32 +149,27 @@ function ClientLogin() {
                       name="password"
                       type="password"
                       value={password}
+                      placeholder="Enter password"
                       onChange={(e) => setPassword(e.target.value)}
                       autoComplete="current-password"
                       required
-                      className="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-3xl"
+                      className="login-inputs block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-3xl"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <button
+                <div className="flex items-center justify-center">
+                  {/* <button
                     type="submit"
                     className="inline-flex w-full items-center justify-center rounded-3xl bg-[#004787] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#004787]/80 "
                   >
                     Sign in
+                  </button> */}
+                  <button type="submit" className="bn632-hover bn18 w-full ">
+                    Sign in
                   </button>
                 </div>
               </form>
-              <p className="mt-10 text-center text-sm text-gray-500">
-                Not a member?{" "}
-                <a
-                  href="#"
-                  className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-                >
-                  Contact Admin
-                </a>
-              </p>
             </div>
           </div>
         </div>

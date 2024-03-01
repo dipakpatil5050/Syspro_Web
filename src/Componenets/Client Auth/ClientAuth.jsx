@@ -85,7 +85,7 @@ function ClientAuth() {
                     "
                       onClick={handleSubmit}
                     >
-                      Submit
+                      Connect Now
                     </button>
                   </div>
                 </div>

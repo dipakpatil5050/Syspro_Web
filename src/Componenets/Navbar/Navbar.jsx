@@ -120,10 +120,8 @@ function Navbar() {
 
       <header className="relative ">
         {/* #004787 */}
-        <nav
-          aria-label="Top"
-          className="px-4 sm:px-6 lg:px-8 bg-[#343a40] h-16"
-        >
+        {/* [#343a40] */}
+        <nav aria-label="Top" className="px-4 sm:px-6 lg:px-8 bg-gray-100 h-20">
           <div className="">
             <div className="flex items-center justify-center ">
               <button
@@ -143,7 +141,7 @@ function Navbar() {
                       {/* Hariba logo section */}
                       <div className=" md:w-28 lg:w-28 xl:w-28  z-50 ">
                         <img
-                          src="http://103.67.238.230:1384/img/logo/istockphoto-1315019418-170667a.jpeg"
+                          src="https://i.imgur.com/vA1uxoT.png"
                           alt="Logo"
                           className="w-28"
                         />
@@ -159,7 +157,7 @@ function Navbar() {
                     href="#"
                     className="flex items-center  text-gray-700 font-bold mb-3 mr-3"
                   >
-                    <h3 className="text-sm text-white">
+                    <h3 className="text-sm text-black">
                       Welcome, {CompanyName}
                     </h3>
                   </a>

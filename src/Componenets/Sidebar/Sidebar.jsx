@@ -11,8 +11,10 @@ import {
 
 export function Sidebar() {
   return (
-    <aside className="flex h-[80vh] w-64 flex-col overflow-y-auto border-r bg-white px-5 py-8 ">
-      {/* <a href="#">
+    <>
+      <div className="flex">
+        <aside className="flex h-[90vh] w-64 flex-col overflow-y-auto bg-gray-100 px-5 py-8 ">
+          {/* <a href="#">
         <svg
           width="40"
           height="46"
@@ -26,55 +28,62 @@ export function Sidebar() {
           />
         </svg>
       </a> */}
-      <div className="mt-6 flex flex-1 flex-col justify-between">
-        <nav className="-mx-3 space-y-6 ">
-          <div className="space-y-3 ">
-            <label className="px-3 text-xs font-semibold uppercase text-gray-900">
-              analytics
-            </label>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <BarChart className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Dashboard</span>
-            </a>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <Wallet className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Configuration</span>
-            </a>
-          </div>
-          <div className="space-y-3 ">
-            <label className="px-3 text-xs font-semibold uppercase text-gray-900">
-              content
-            </label>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <Newspaper className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Sale Order</span>
-            </a>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <BellRing className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Notifications</span>
-            </a>
-            <a
-              className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              href="#"
-            >
-              <Paperclip className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Purchase Order</span>
-            </a>
-          </div>
+          <div className="mt-6 flex flex-1 flex-col justify-between">
+            <nav className="-mx-3 space-y-6 ">
+              <div className="space-y-3 ">
+                <label className="px-3 text-xs font-semibold uppercase text-gray-900">
+                  analytics
+                </label>
+                <a
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  href="#"
+                >
+                  <BarChart className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">Dashboard</span>
+                </a>
+                <a
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  href="#"
+                >
+                  <Wallet className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">
+                    Configuration
+                  </span>
+                </a>
+              </div>
+              <div className="space-y-3 ">
+                <label className="px-3 text-xs font-semibold uppercase text-gray-900">
+                  content
+                </label>
+                <a
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  href="#"
+                >
+                  <Newspaper className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">Sale Order</span>
+                </a>
 
-          {/* <div className="space-y-3 ">
+                <a
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  href="#"
+                >
+                  <Paperclip className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">
+                    Purchase Order
+                  </span>
+                </a>
+                <a
+                  className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                  href="#"
+                >
+                  <BellRing className="h-5 w-5" aria-hidden="true" />
+                  <span className="mx-2 text-sm font-medium">
+                    Notifications
+                  </span>
+                </a>
+              </div>
+
+              {/* <div className="space-y-3 ">
             <label className="px-3 text-xs font-semibold uppercase text-gray-900">
               Customization
             </label>
@@ -93,8 +102,72 @@ export function Sidebar() {
               <span className="mx-2 text-sm font-medium">Setting</span>
             </a>
           </div> */}
-        </nav>
+            </nav>
+          </div>
+        </aside>
+        <div className="content flex flex-wrap">
+          <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
+            <img
+              src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+              alt="Laptop"
+              className="h-[200px] w-full rounded-md object-cover"
+            />
+            <div className="p-4">
+              <h1 className="text-lg font-semibold">About Macbook</h1>
+              <p className="mt-3 text-sm text-gray-600">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi, debitis?
+              </p>
+              <button
+                type="button"
+                className="mt-4 rounded-sm bg-black px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                Read
+              </button>
+            </div>
+          </div>
+          <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
+            <img
+              src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+              alt="Laptop"
+              className="h-[200px] w-full rounded-md object-cover"
+            />
+            <div className="p-4">
+              <h1 className="text-lg font-semibold">About Macbook</h1>
+              <p className="mt-3 text-sm text-gray-600">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi, debitis?
+              </p>
+              <button
+                type="button"
+                className="mt-4 rounded-sm bg-black px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                Read
+              </button>
+            </div>
+          </div>
+          <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
+            <img
+              src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+              alt="Laptop"
+              className="h-[200px] w-full rounded-md object-cover"
+            />
+            <div className="p-4">
+              <h1 className="text-lg font-semibold">About Macbook</h1>
+              <p className="mt-3 text-sm text-gray-600">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi, debitis?
+              </p>
+              <button
+                type="button"
+                className="mt-4 rounded-sm bg-black px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+              >
+                Read
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </aside>
+    </>
   );
 }
