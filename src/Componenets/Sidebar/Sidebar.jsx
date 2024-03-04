@@ -141,7 +141,7 @@ export function Sidebar() {
               className="h-[200px] w-full rounded-md object-cover"
             />
             <div className="p-4">
-              <h1 className="text-lg font-semibold">Sale Order</h1>
+              <h1 className="text-lg font-semibold">Sale Orders</h1>
               <p className="mt-3 text-sm text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Excepturi, debitis?
