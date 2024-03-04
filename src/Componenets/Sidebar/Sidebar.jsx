@@ -108,62 +108,44 @@ export function Sidebar() {
         <div className="content flex flex-wrap">
           <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
             <img
-              src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+              src="https://imgs.search.brave.com/WOvVV9jD9iFdJ5_UgDmeNyXpqGM4K34v0vTutsL4_lw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jYW52/YXNqcy5jb20vd3At/Y29udGVudC91cGxv/YWRzL2ltYWdlcy9n/YWxsZXJ5L2phdmFz/Y3JpcHQtY2hhcnRz/L2xpbmUvamF2YXNj/cmlwdC1saW5lLWNo/YXJ0cy1ncmFwaHMu/cG5n"
               alt="Laptop"
               className="h-[200px] w-full rounded-md object-cover"
             />
             <div className="p-4">
-              <h1 className="text-lg font-semibold">About Macbook</h1>
+              <h1 className="text-lg font-semibold">Sale Report </h1>
               <p className="mt-3 text-sm text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Excepturi, debitis?
               </p>
-              <button
-                type="button"
-                className="mt-4 rounded-sm bg-black px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              >
-                Read
-              </button>
             </div>
           </div>
           <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
             <img
-              src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+              src="https://imgs.search.brave.com/SgWal2KQnrkOiYxcYcTqTc6lvlYjaFVm_2BdsKgAJhQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9saDYu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tL3VI/VTdGMEVxMjF4alFn/b3Rna09LampmSm5R/NGNmMDQ5T2tKdE0w/TTZOZWFqbnNXZmEz/UF96ck9TcEF2cDZ5/bnBPU084Y3d6ZUdE/T2MwWUYtbUVLN1g3/bmpFVUdydmdfMXI3/dE9JMFRSUGgtQXNo/WjZ3UDk4RTBBV2JF/VFNCaE1ydURXcDN2/dGE"
               alt="Laptop"
               className="h-[200px] w-full rounded-md object-cover"
             />
             <div className="p-4">
-              <h1 className="text-lg font-semibold">About Macbook</h1>
+              <h1 className="text-lg font-semibold">Purchase Report</h1>
               <p className="mt-3 text-sm text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Excepturi, debitis?
               </p>
-              <button
-                type="button"
-                className="mt-4 rounded-sm bg-black px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              >
-                Read
-              </button>
             </div>
           </div>
           <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
             <img
-              src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGJsb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+              src="https://imgs.search.brave.com/ulQyrCZWinK2LU_12zlPYa3IP_3l8pznoK-ZJXa--es/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y2xvdWRpbmFyeS5j/b20vcHJhY3RpY2Fs/ZGV2L2ltYWdlL2Zl/dGNoL3MtLUJocm9z/RU1RLS0vY19saW1p/dCxmX2F1dG8sZmxf/cHJvZ3Jlc3NpdmUs/cV9hdXRvLHdfODAw/L2h0dHBzOi8vZGV2/LXRvLXVwbG9hZHMu/czMuYW1hem9uYXdz/LmNvbS91cGxvYWRz/L2FydGljbGVzL2g2/Y3B6ejVxa2M2cWVu/OHUyN2tqLmpwZw"
               alt="Laptop"
               className="h-[200px] w-full rounded-md object-cover"
             />
             <div className="p-4">
-              <h1 className="text-lg font-semibold">About Macbook</h1>
+              <h1 className="text-lg font-semibold">Sale Order</h1>
               <p className="mt-3 text-sm text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Excepturi, debitis?
               </p>
-              <button
-                type="button"
-                className="mt-4 rounded-sm bg-black px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              >
-                Read
-              </button>
             </div>
           </div>
         </div>
