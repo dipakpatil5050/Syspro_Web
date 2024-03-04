@@ -53,41 +53,70 @@ function ClientAuth() {
 
   return (
     <>
-      <section className="mpin h-screen w-full">
-        <div className="">
-          <div className=" flex sitems-center justify-center px-2 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-            <div className="xl:mx-auto xl:w-full xl:max-w-sm sm:max-w-sm  2xl:max-w-md mt-20 pr-6 rounded-3xl pt-20">
-              <h2 className="mpintxt text-center text-3xl leading-tight font-bold text-black">
-                M-Pin
-              </h2>
+      <section>
+        <div className="grid grid-cols-1 lg:grid-cols-2 ">
+          <div className="relative flex items-end px-4 pb-10 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 max-[390px]:hidden">
+            <div className="">
+              <img
+                className="h-full w-full ml-14 mt-44 object-cover object-top"
+                src="https://img.freepik.com/premium-photo/graphic-software-small-business-companion_927851-5607.jpg?w=740"
+                alt=""
+              />
+            </div>
+          </div>
+          <div className=" flex flex-1 flex-col justify-center mt-10 px-6 py-12 lg:px-8 ">
+            <div className="sm:mx-auto lg:w-6/12 sm:max-w-sm ">
+              <img
+                className="mx-auto w-auto sm:w-full"
+                src="https://sysproerp.in/includes/site/assets/images/logo-footer.png"
+                alt="Company logo"
+              />
+              <h3 className="flex items-center justify-center text-xl font-bold">
+                {/* {ClientType} */}
+              </h3>
+              {/* <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                Sign in to your account
+              </h2> */}
+            </div>
 
-              <form
-                method="POST"
-                className="mt-8 flex items-center justify-center"
-              >
-                <div className="space-y-5">
-                  <div>
-                    <div className="">
-                      <input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 text-black mpintxt"
-                        type="text"
-                        value={mPin}
-                        onChange={handleInputChange}
-                        placeholder="Enter your M-pin here..."
-                      ></input>
-                    </div>
-                  </div>
-                  <div></div>
-                  <div>
-                    <button
-                      type="submit"
-                      className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80 transition duration-300 ease-in-out sm:rounded-2xl
-                    "
-                      onClick={handleSubmit}
+            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="mPin"
+                      className=" text-sm font-medium leading-6 text-gray-900 login-txt "
                     >
-                      Connect Now
-                    </button>
+                      M-Pin
+                    </label>
                   </div>
+                  <div className="mt-2">
+                    <input
+                      name="password"
+                      type="text"
+                      value={mPin}
+                      onChange={handleInputChange}
+                      placeholder="Enter your M-pin here..."
+                      required
+                      className="login-inputs block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 rounded-3xl"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center">
+                  {/* <button
+                    type="submit"
+                    className="inline-flex w-full items-center justify-center rounded-3xl bg-[#004787] px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-[#004787]/80 "
+                  >
+                    Sign in
+                  </button> */}
+                  <button
+                    type="submit"
+                    onClick={handleSubmit}
+                    className="bn632-hover bn18 w-full "
+                  >
+                    Sign in
+                  </button>
                 </div>
               </form>
             </div>

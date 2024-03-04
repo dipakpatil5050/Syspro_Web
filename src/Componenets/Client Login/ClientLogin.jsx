@@ -16,8 +16,6 @@ function ClientLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  // const user = localStorage.getItem("user");
-
   const dispatch = useDispatch();
   const userMpinData = useSelector((state) => state.auth.userMpinData);
 
@@ -87,10 +85,10 @@ function ClientLogin() {
     <>
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-2 ">
-          <div className="relative flex items-end px-4 pb-10 pt-60 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 max-[390px]:hidden">
-            <div className="absolute inset-0">
+          <div className="relative flex items-end px-4 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 max-[390px]:hidden">
+            <div className="">
               <img
-                className="h-full w-full ml-14 mt-14  object-cover object-top"
+                className="h-full w-full ml-14 mt-44 object-cover object-top"
                 src="https://img.freepik.com/premium-photo/graphic-software-small-business-companion_927851-5607.jpg?w=740"
                 alt=""
               />

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ClientAuth from "../Client Auth/ClientAuth";
 import ClientLogin from "../Client Login/ClientLogin";
 import Home from "../Home Page/Home";
+import NoPage from "../nopage/NoPage";
 function RouteFile() {
   return (
     <>
@@ -11,6 +12,7 @@ function RouteFile() {
           <Route path="/" exact element={<ClientAuth />} />
           <Route path="/login" element={<ClientLogin />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/*" element={<NoPage />} />
         </Routes>
       </Router>
     </>

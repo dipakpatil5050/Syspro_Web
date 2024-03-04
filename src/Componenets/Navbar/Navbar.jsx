@@ -26,11 +26,11 @@ function Navbar() {
   const navigate = useNavigate();
   const CompanyName = userData?.CompanyName;
   const dispatch = useDispatch();
+
   const handleLogout = () => {
     Cookies.remove("token");
     dispatch(setUserData(null));
     dispatch(setuserMpinData(null));
-
     navigate("/");
   };
 

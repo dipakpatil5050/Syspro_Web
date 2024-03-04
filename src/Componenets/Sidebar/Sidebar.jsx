@@ -108,7 +108,7 @@ export function Sidebar() {
         <div className="content flex flex-wrap">
           <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
             <img
-              src="https://imgs.search.brave.com/WOvVV9jD9iFdJ5_UgDmeNyXpqGM4K34v0vTutsL4_lw/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jYW52/YXNqcy5jb20vd3At/Y29udGVudC91cGxv/YWRzL2ltYWdlcy9n/YWxsZXJ5L2phdmFz/Y3JpcHQtY2hhcnRz/L2xpbmUvamF2YXNj/cmlwdC1saW5lLWNo/YXJ0cy1ncmFwaHMu/cG5n"
+              src="https://imgs.search.brave.com/1hujxFj4JPOG5wHgfreJo5McPPd8bxhrc7X3Zhp3gs8/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/c2tpbGxzeW91bmVl/ZC5jb20vaW1hZ2Vz/L3BpZS1jaGFydC5w/bmc"
               alt="Laptop"
               className="h-[200px] w-full rounded-md object-cover"
             />
