@@ -15,6 +15,15 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../redux/reducers/authReducer";
 import { setuserMpinData } from "../../redux/reducers/authReducer";
+import {
+  BarChart,
+  Wallet,
+  Newspaper,
+  BellRing,
+  Paperclip,
+  Brush,
+  Wrench,
+} from "lucide-react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -24,7 +33,7 @@ function Navbar() {
 
   const userData = useSelector((state) => state.auth.userData);
   const navigate = useNavigate();
-  const CompanyName = userData?.CompanyName;
+  const CompanyName = userData?.Data?.CompanyName;
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -48,7 +57,7 @@ function Navbar() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-white bg-opacity-90" />
           </Transition.Child>
 
           <div className="fixed inset-0 z-40 flex ">
@@ -73,37 +82,85 @@ function Navbar() {
                   </button>
                 </div>
                 <div className="space-y-3 border-t flex flex-col border-gray-200 px-4 py-6">
-                  <div className="flex flex-col gap-5">
-                    <Link
-                      to={"/home"}
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer mobile-tab"
-                    >
-                      Home
-                    </Link>
-                    <Link
-                      to={"/about"}
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer mobile-tab"
-                    >
-                      About
-                    </Link>
-                    <Link
-                      to={"/products"}
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
-                    >
-                      Products
-                    </Link>
-                    <Link
-                      to={"/contact"}
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
-                    >
-                      Contact
-                    </Link>
-                    <Link
-                      to={"/clients"}
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
-                    >
-                      Documentation
-                    </Link>
+                  <div className="mt-6 flex flex-1 flex-col justify-between">
+                    <nav className="-mx-3 space-y-6 ">
+                      <div className="space-y-3 ">
+                        <label className="px-3 text-xs font-semibold uppercase text-gray-900">
+                          analytics
+                        </label>
+                        <a
+                          className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                          href="#"
+                        >
+                          <BarChart className="h-5 w-5" aria-hidden="true" />
+                          <span className="mx-2 text-sm font-medium">
+                            Dashboard
+                          </span>
+                        </a>
+                        <a
+                          className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                          href="#"
+                        >
+                          <Wallet className="h-5 w-5" aria-hidden="true" />
+                          <span className="mx-2 text-sm font-medium">
+                            Configuration
+                          </span>
+                        </a>
+                      </div>
+                      <div className="space-y-3 ">
+                        <label className="px-3 text-xs font-semibold uppercase text-gray-900">
+                          content
+                        </label>
+                        <a
+                          className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                          href="#"
+                        >
+                          <Newspaper className="h-5 w-5" aria-hidden="true" />
+                          <span className="mx-2 text-sm font-medium">
+                            Sale Order
+                          </span>
+                        </a>
+
+                        <a
+                          className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                          href="#"
+                        >
+                          <Paperclip className="h-5 w-5" aria-hidden="true" />
+                          <span className="mx-2 text-sm font-medium">
+                            Purchase Order
+                          </span>
+                        </a>
+                        <a
+                          className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                          href="#"
+                        >
+                          <Newspaper className="h-5 w-5" aria-hidden="true" />
+                          <span className="mx-2 text-sm font-medium">
+                            Ledger Report
+                          </span>
+                        </a>
+                      </div>
+
+                      {/* <div className="space-y-3 ">
+            <label className="px-3 text-xs font-semibold uppercase text-gray-900">
+              Customization
+            </label>
+            <a
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+              href="#"
+            >
+              <Brush className="h-5 w-5" aria-hidden="true" />
+              <span className="mx-2 text-sm font-medium">Themes</span>
+            </a>
+            <a
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+              href="#"
+            >
+              <Wrench className="h-5 w-5" aria-hidden="true" />
+              <span className="mx-2 text-sm font-medium">Setting</span>
+            </a>
+          </div> */}
+                    </nav>
                   </div>
                 </div>
 

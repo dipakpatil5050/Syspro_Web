@@ -47,8 +47,8 @@ function ClientLogin() {
 
     try {
       const response = await axios.post(loginUrl, body, { headers });
-      const userData = response.data.Data;
-      const Token = userData.Token;
+      const userData = response.data;
+      const Token = userData?.Data?.Token;
       // const CompanyName = userData.CompanyName;
 
       Cookies.set("token", Token, { expires: 7 });
