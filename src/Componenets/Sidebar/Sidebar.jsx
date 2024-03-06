@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  BarChart,
-  Wallet,
-  Newspaper,
-  BellRing,
-  Paperclip,
-  Brush,
-  Wrench,
-} from "lucide-react";
+import { BarChart, Wallet, Newspaper, Paperclip } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -15,8 +7,12 @@ import { setLedgerReport } from "../../redux/reducers/authReducer";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Loader from "../Loader/Loader";
+
 export function Sidebar() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+
   const ledgerReportData = useSelector((state) => state.auth.LedgerReport);
 
   // const ledgerextract = ledgerReportData?.data?.Data;
@@ -53,17 +49,18 @@ export function Sidebar() {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
+    return `${day < 10 ? "0" : ""}${day}-${
+      month < 10 ? "0" : ""
+    }${month}-${year}`;
   };
 
-  const [fromDate, setFromDate] = useState(
-    defaultFromDate.toLocaleDateString("en-US")
-  );
-  const [toDate, setToDate] = useState(
-    defaultToDate.toLocaleDateString("en-US")
-  );
+  const [fromDate, setFromDate] = useState(defaultFromDate);
+  const [toDate, setToDate] = useState(defaultToDate);
+  const [viewPdf, setViewPdf] = useState("");
   const [ReportID, setReportID] = useState("");
   const [ReportName, setReportName] = useState("");
+
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const fetchLedgerReport = async () => {
     const LedgerReportAPI = `${ServerBaseUrl}api/CommonFas/LedgerReport`;
@@ -95,23 +92,22 @@ export function Sidebar() {
     }
   };
 
-  const handleLedgerReport = async (e) => {
-    e.preventDefault();
-    try {
-      await fetchLedgerReport();
-    } catch (error) {
-      console.error("Error in Ledger report data fetching:", error);
-      toast.error("Error in fetching Ledger report data from API Server.");
-    }
-  };
+  // const handleLedgerReport = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await fetchLedgerReport();
+  //   } catch (error) {
+  //     console.error("Error in Ledger report data fetching:", error);
+  //     toast.error("Error in fetching Ledger report data from API Server.");
+  //   }
+  // };
 
   //PDF API
-
   const fetchPDF = async () => {
     const PDFAPI = `${ServerBaseUrl}/api/CommonFas/LedgerReportPost`;
     const body = {
-      FromDate: fromDate,
-      ToDate: toDate,
+      FromDate: formatDate(fromDate),
+      ToDate: formatDate(toDate),
       AmountGtEq: 0,
       CustomFilter: "",
       IntReportId: 0,
@@ -123,8 +119,8 @@ export function Sidebar() {
       CompanyAddress1: CompanyAddress1,
       CompanyAddress2: CompanyAddress2,
       type: "pdf",
-      ReportID: "Ledger.Rpt",
-      ReportName: "Ledger Report",
+      ReportID: selectedOption.value,
+      ReportName: selectedOption.label,
       SysKey: "1",
       CompanyID: CompanyID,
       YearMasterID: YearMasterID,
@@ -147,6 +143,7 @@ export function Sidebar() {
     try {
       const ledgerReportPDF = response?.data?.Data;
       const pdfurl = ledgerReportPDF?.ReportPath;
+      setViewPdf(pdfurl);
       console.log(pdfurl);
       // dispatch(setLedgerReport(ledgerReportData));
     } catch (error) {
@@ -156,18 +153,27 @@ export function Sidebar() {
   };
 
   const handleLedgerReportPDF = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       await fetchPDF();
     } catch (error) {
       console.error("Error in Ledger report data fetching:", error);
       // toast.error("Error in fetching Ledger report data from API Server.");
+    } finally {
+      setLoading(false); // Set loading state to false whether request succeeds or fails
     }
   };
 
   useEffect(() => {
     fetchLedgerReport();
   }, []);
+
+  const handleSelectChange = (selectedOption) => {
+    console.log("Selected value:", selectedOption.value);
+    console.log("Selected label:", selectedOption.label);
+    setSelectedOption(selectedOption);
+  };
 
   return (
     <>
@@ -230,184 +236,162 @@ export function Sidebar() {
             </nav>
           </div>
         </aside>
-        <div className="content flex flex-wrap ml-16 mt-10">
-          <form method="POST">
-            <div className="space-y-12">
-              <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-2xl font-bold leading-7 text-gray-900">
-                  Ledger Report
-                </h2>
-              </div>
+        {loading && <Loader />}
+        {!loading && !viewPdf && (
+          <div className="content flex flex-wrap ml-16 mt-10">
+            <form method="POST">
+              <div className="space-y-12">
+                <div className="border-b border-gray-900/10 pb-12">
+                  <h2 className="text-2xl font-bold leading-7 text-gray-900">
+                    Ledger Report
+                  </h2>
+                </div>
 
-              <div className="border-b border-gray-900/10 pb-12">
-                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="from-date"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      From Date
-                    </label>
-                    <div className="mt-2">
-                      <DatePicker
-                        selected={fromDate}
-                        onChange={(date) => setFromDate(date)}
-                        id="from-date"
-                        dateFormat="dd-MM-yyyy"
-                        name="from-date"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
+                <div className="border-b border-gray-900/10 pb-12">
+                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="from-date"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        From Date
+                      </label>
+                      <div className="mt-2">
+                        <DatePicker
+                          selected={fromDate}
+                          onChange={(date) => setFromDate(date)}
+                          id="from-date"
+                          dateFormat="dd-MM-yyyy"
+                          name="from-date"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="to-date"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      To Date
-                    </label>
-                    <div className="mt-2">
-                      <DatePicker
-                        selected={toDate}
-                        onChange={(date) => setToDate(date)}
-                        id="to-date"
-                        name="to-date"
-                        dateFormat="dd-MM-yyyy"
-                        minDate={fromDate}
-                        maxDate={
-                          new Date(
-                            currentDate.getFullYear() + 1,
-                            currentDate.getMonth(),
-                            currentDate.getDate()
-                          )
-                        }
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="to-date"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        To Date
+                      </label>
+                      <div className="mt-2">
+                        <DatePicker
+                          selected={toDate}
+                          onChange={(date) => setToDate(date)}
+                          id="to-date"
+                          name="to-date"
+                          dateFormat="dd-MM-yyyy"
+                          minDate={fromDate}
+                          maxDate={
+                            new Date(
+                              currentDate.getFullYear() + 1,
+                              currentDate.getMonth(),
+                              currentDate.getDate()
+                            )
+                          }
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="report-type"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Report Type
-                    </label>
-                    <div className="mt-2">
-                      <Select
-                        id="party"
-                        name="party"
-                        options={ledgerReportData?.Table.map((report) => ({
-                          value: report.Rep_Rpt,
-                          label: report.Rep_Name,
-                        }))}
-                        placeholder="Select Party"
-                        isSearchable={true}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                      />
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="report-type"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Report Type
+                      </label>
+                      <div className="mt-2">
+                        <Select
+                          id="party"
+                          name="party"
+                          options={ledgerReportData?.Table.map((report) => ({
+                            value: report.Rep_Rpt,
+                            label: report.Rep_Name,
+                          }))}
+                          placeholder="Select Party"
+                          isSearchable={true}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                          onChange={handleSelectChange}
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="party"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Party
-                    </label>
-                    <div className="mt-2">
-                      <Select
-                        id="party"
-                        name="party"
-                        options={ledgerReportData?.Table3.map((report) => ({
-                          value: report.Account_ID,
-                          label: report.Account_Name,
-                        }))}
-                        placeholder="Select Party"
-                        isSearchable={true}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                      />
+                    <div className="sm:col-span-3">
+                      <label
+                        htmlFor="party"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Party
+                      </label>
+                      <div className="mt-2">
+                        <Select
+                          id="party"
+                          name="party"
+                          options={ledgerReportData?.Table3.map((report) => ({
+                            value: report.Account_ID,
+                            label: report.Account_Name,
+                          }))}
+                          placeholder="Select Party"
+                          isSearchable={true}
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="sm:col-span-2 sm:col-start-1">
-                    <label
-                      htmlFor="account-group"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Account Group
-                    </label>
-                    <div className="mt-2">
-                      <Select
-                        id="party"
-                        name="party"
-                        options={ledgerReportData?.Table2.map((report) => ({
-                          value: report.AccountGroup_id,
-                          label: report.AccountGroup_Name,
-                        }))}
-                        placeholder="Select Party"
-                        isSearchable={true}
-                        className="block w-56 rounded-md border-0 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 bg-white"
-                      />
+                    <div className="sm:col-span-2 sm:col-start-1">
+                      <label
+                        htmlFor="account-group"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Account Group
+                      </label>
+                      <div className="mt-2">
+                        <Select
+                          id="party"
+                          name="party"
+                          options={ledgerReportData?.Table2.map((report) => ({
+                            value: report.AccountGroup_id,
+                            label: report.AccountGroup_Name,
+                          }))}
+                          placeholder="Select Party"
+                          isSearchable={true}
+                          className="block w-56 rounded-md border-0 py-1.5 text-gray-900 placeholder:text-gray-400 sm:text-sm sm:leading-6 bg-white"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {console.log(toDate)}
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-              <button
-                onClick={handleLedgerReportPDF}
-                className="rounded-md bg-[#232981] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#3e45a8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Apply
-              </button>
-            </div>
-          </form>
-          {/* <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
-            <img
-              src="https://imgs.search.brave.com/1hujxFj4JPOG5wHgfreJo5McPPd8bxhrc7X3Zhp3gs8/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/c2tpbGxzeW91bmVl/ZC5jb20vaW1hZ2Vz/L3BpZS1jaGFydC5w/bmc"
-              alt="Laptop"
-              className="h-[200px] w-full rounded-md object-cover"
-            />
-            <div className="p-4">
-              <h1 className="text-lg font-semibold">Sale Report </h1>
-              <p className="mt-3 text-sm text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Excepturi, debitis?
-              </p>
-            </div>
+              <div className="mt-6 flex items-center justify-end gap-x-6">
+                <button
+                  onClick={handleLedgerReportPDF}
+                  className="rounded-md bg-[#232981] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#3e45a8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Apply
+                </button>
+              </div>
+            </form>
           </div>
-          <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
-            <img
-              src="https://imgs.search.brave.com/SgWal2KQnrkOiYxcYcTqTc6lvlYjaFVm_2BdsKgAJhQ/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9saDYu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tL3VI/VTdGMEVxMjF4alFn/b3Rna09LampmSm5R/NGNmMDQ5T2tKdE0w/TTZOZWFqbnNXZmEz/UF96ck9TcEF2cDZ5/bnBPU084Y3d6ZUdE/T2MwWUYtbUVLN1g3/bmpFVUdydmdfMXI3/dE9JMFRSUGgtQXNo/WjZ3UDk4RTBBV2JF/VFNCaE1ydURXcDN2/dGE"
-              alt="Laptop"
-              className="h-[200px] w-full rounded-md object-cover"
-            />
-            <div className="p-4">
-              <h1 className="text-lg font-semibold">Purchase Report</h1>
-              <p className="mt-3 text-sm text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Excepturi, debitis?
-              </p>
-            </div>
+        )}
+        {viewPdf && (
+          <div className="pdf-container border-2 z-50 absolute">
+            <button
+              className="flex items-center justify-end w-full pr-14"
+              onClick={() => setViewPdf(null)}
+            >
+              Close
+            </button>
+            <iframe
+              className="w-screen h-screen"
+              src={viewPdf}
+              title="Ledger Reports"
+            >
+              Presss me: <a href={viewPdf}>Download PDF</a>
+            </iframe>
           </div>
-          <div className="w-64 rounded-md border h-[45vh] ml-5 mt-5">
-            <img
-              src="https://imgs.search.brave.com/ulQyrCZWinK2LU_12zlPYa3IP_3l8pznoK-ZJXa--es/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y2xvdWRpbmFyeS5j/b20vcHJhY3RpY2Fs/ZGV2L2ltYWdlL2Zl/dGNoL3MtLUJocm9z/RU1RLS0vY19saW1p/dCxmX2F1dG8sZmxf/cHJvZ3Jlc3NpdmUs/cV9hdXRvLHdfODAw/L2h0dHBzOi8vZGV2/LXRvLXVwbG9hZHMu/czMuYW1hem9uYXdz/LmNvbS91cGxvYWRz/L2FydGljbGVzL2g2/Y3B6ejVxa2M2cWVu/OHUyN2tqLmpwZw"
-              alt="Laptop"
-              className="h-[200px] w-full rounded-md object-cover"
-            />
-            <div className="p-4">
-              <h1 className="text-lg font-semibold">Sale Orders</h1>
-              <p className="mt-3 text-sm text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Excepturi, debitis?
-              </p>
-            </div>
-          </div> */}
-        </div>
+        )}
       </div>
     </>
   );

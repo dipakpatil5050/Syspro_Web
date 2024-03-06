@@ -16,13 +16,14 @@ function Home() {
   const Logout = () => {
     Cookies.remove("token");
     dispatch(setUserData(null));
-    
+
     navigate("/");
   };
 
   return (
     <>
       <Navbar />
+
       <Sidebar />
       <Footer />
     </>
