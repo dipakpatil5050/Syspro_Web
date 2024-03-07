@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -15,6 +15,7 @@ function ClientLogin() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const usernameInputRef = useRef(null);
 
   const dispatch = useDispatch();
   const userMpinData = useSelector((state) => state.auth.userMpinData);
@@ -23,6 +24,10 @@ function ClientLogin() {
   const ServerBaseUrl = userMpinData?.Data?.ServerBaseUrl;
   const mPin = userMpinData?.Data?.mPin;
   const userData = useSelector((state) => state.auth.userData);
+
+  useEffect(() => {
+    usernameInputRef.current.focus();
+  }, []);
 
   useEffect(() => {
     if (userData) {
@@ -54,7 +59,7 @@ function ClientLogin() {
       Cookies.set("token", Token, { expires: 7 });
       dispatch(setUserData(userData));
       navigate("/Home");
-      // toast.success("Login successful!");
+      toast.success("Login successful!");
     } catch (error) {
       console.error("Error logging in:", error);
       toast.error(
@@ -94,16 +99,18 @@ function ClientLogin() {
               />
             </div>
           </div>
-          <div className=" flex flex-1 flex-col justify-center mt-10 px-6 py-12 lg:px-8 ">
+          <div className=" flex flex-1 flex-col justify-center mt-10 px-6 lg:px-8 ">
             <div className="sm:mx-auto lg:w-6/12 sm:max-w-sm ">
               <img
                 className="mx-auto w-auto sm:w-full"
                 src="https://sysproerp.in/includes/site/assets/images/logo-footer.png"
                 alt="Company logo"
               />
+
               <h3 className="flex items-center justify-center text-xl font-bold">
                 {/* {ClientType} */}
               </h3>
+
               {/* <h2 className="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Sign in to your account
               </h2> */}
@@ -120,6 +127,7 @@ function ClientLogin() {
                   </label>
                   <div className="mt-2">
                     <input
+                      ref={usernameInputRef}
                       id="email"
                       name="email"
                       type="text"
@@ -136,7 +144,7 @@ function ClientLogin() {
                   <div className="flex items-center justify-between">
                     <label
                       htmlFor="password"
-                      className=" block text-sm font-medium leading-6 text-gray-900 login-txt "
+                      className=" block text-sm font-medium leading-6 text-gray-900 login-txt"
                     >
                       Password
                     </label>

@@ -170,8 +170,8 @@ export function Sidebar() {
   }, []);
 
   const handleSelectChange = (selectedOption) => {
-    console.log("Selected value:", selectedOption.value);
-    console.log("Selected label:", selectedOption.label);
+    // console.log("Selected value:", selectedOption.value);
+    // console.log("Selected label:", selectedOption.label);
     setSelectedOption(selectedOption);
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -10,6 +10,11 @@ function ClientAuth() {
   const [mPin, setMPin] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const mPinInputRef = useRef(null);
+
+  useEffect(() => {
+    mPinInputRef.current.focus();
+  }, []);
 
   const handleInputChange = (e) => {
     setMPin(e.target.value);
@@ -55,7 +60,7 @@ function ClientAuth() {
     <>
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-2 ">
-          <div className="relative flex items-end px-4 pb-10 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 max-[390px]:hidden">
+          <div className="relative flex items-end px-4 pb-10 sm:px-6 sm:pb-16 md:justify-center lg:px-8 lg:pb-24 max-[390px]:hidden ">
             <div className="">
               <img
                 className="h-full w-full ml-14 mt-44 object-cover object-top"
@@ -64,7 +69,7 @@ function ClientAuth() {
               />
             </div>
           </div>
-          <div className=" flex flex-1 flex-col justify-center mt-10 px-6 py-12 lg:px-8 ">
+          <div className=" flex flex-1 flex-col justify-center mt-10 px-6  lg:px-8 ">
             <div className="sm:mx-auto lg:w-6/12 sm:max-w-sm ">
               <img
                 className="mx-auto w-auto sm:w-full"
@@ -92,7 +97,8 @@ function ClientAuth() {
                   </div>
                   <div className="mt-2">
                     <input
-                      name="password"
+                      ref={mPinInputRef}
+                      name="mPin"
                       type="text"
                       value={mPin}
                       onChange={handleInputChange}

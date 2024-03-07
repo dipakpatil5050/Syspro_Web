@@ -4,9 +4,9 @@ import React, { Fragment, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 // import { FiUser } from "react-icons/fi";
 import { Dialog, Transition, Menu, Disclosure } from "@headlessui/react";
-// import { RxCross2 } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
 // import { BsCart3 } from "react-icons/bs";
-// import { FaBars } from "react-icons/fa6";
+import { FaBars } from "react-icons/fa6";
 // import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaPowerOff } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -57,7 +57,7 @@ function Navbar() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-white bg-opacity-90" />
+            <div className="fixed inset-0 bg-white" />
           </Transition.Child>
 
           <div className="fixed inset-0 z-40 flex ">
@@ -78,7 +78,7 @@ function Navbar() {
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close menu</span>
-                    {/* <RxCross2 /> */}
+                    <RxCross2 />
                   </button>
                 </div>
                 <div className="space-y-3 border-t flex flex-col border-gray-200 px-4 py-6">
@@ -187,7 +187,7 @@ function Navbar() {
                 onClick={() => setOpen(true)}
               >
                 <span className="sr-only">Open menu</span>
-                {/* <FaBars size={26} /> */}
+                <FaBars size={26} />
               </button>
 
               {/* Logo */}
