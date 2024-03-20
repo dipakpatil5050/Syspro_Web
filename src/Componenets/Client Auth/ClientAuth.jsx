@@ -19,6 +19,7 @@ function ClientAuth() {
   const handleInputChange = (e) => {
     setMPin(e.target.value);
   };
+
   const fetchData = async () => {
     const mpinapi = `http://103.67.238.230:1385/SysMpin/authenticateSysmpin?mPin=${mPin}`;
     const headers = {

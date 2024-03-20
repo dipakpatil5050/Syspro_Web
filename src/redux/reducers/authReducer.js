@@ -6,8 +6,9 @@ export const authSlice = createSlice({
     userData: JSON.parse(sessionStorage.getItem("userData")) || null,
     userMpinData: JSON.parse(sessionStorage.getItem("userMpinData")) || null,
     LedgerReport: null,
+    // isLoggedIn: !!JSON.parse(sessionStorage.getItem("userData")),
   },
-
+  // const isLoggedIn = useSelector(state => state.auth.isLoggedIn); use it into another file
   reducers: {
     setUserData: (state, action) => {
       state.userData = action.payload;

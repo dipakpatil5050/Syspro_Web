@@ -104,7 +104,7 @@ export function Sidebar() {
 
   //PDF API
   const fetchPDF = async () => {
-    const PDFAPI = `${ServerBaseUrl}/api/CommonFas/LedgerReportPost`;
+    const PDFAPI = `${ServerBaseUrl}api/CommonFas/LedgerReportPost`;
     const body = {
       FromDate: formatDate(fromDate),
       ToDate: formatDate(toDate),
